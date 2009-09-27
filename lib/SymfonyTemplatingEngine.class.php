@@ -105,10 +105,12 @@ class SymfonyTemplatingEngine extends TemplateEngine
 
 	protected function getTemplateHelperSets()
 	{
-// var_dump(Site::get_url('habari'));exit;
+	  // strip the subdirectory out of the theme path, as that will already be part of the base URL
+    $themePath = substr(Site::get_path('theme') . '/web', strlen(Site::get_path('base')));
+
 		$sets = array(
 			new sfTemplateHelperAssets(
-				Site::get_path('theme') . '/web',
+				$themePath,
 				Site::get_url('habari')
 			),
 			new sfTemplateHelperJavascripts(),
